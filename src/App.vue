@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, Ref } from 'vue';
+import { storeToRefs } from "pinia";
 
+import { useStore } from "./useStore";
 import Child from './Child.vue';
 
-import { getModels } from './api';
-import Model from './Model';
+const store = useStore();
+const { models } = storeToRefs(store);
 
-const models = ref<Model[]>([]);
+store.loadModels();
 
-getModels().then((m) => (models.value = m));
 </script>
 
 <template>
